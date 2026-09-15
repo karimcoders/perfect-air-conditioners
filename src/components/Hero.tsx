@@ -115,13 +115,13 @@ export default function Hero() {
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-royal-950/30 to-transparent"
               />
-              <figcaption className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-center gap-2 rounded-full bg-white/95 py-2.5 pl-3 pr-3 text-[12px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur sm:inset-x-auto sm:bottom-1.5 sm:left-4 sm:justify-start sm:py-2 sm:pr-4.5 sm:text-[13px]">
+              <figcaption className="absolute bottom-3 left-3 z-10 flex items-center gap-2 rounded-full bg-white/95 py-2 pl-3 pr-3.5 text-[12px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur sm:bottom-1.5 sm:pr-4.5 sm:text-[13px]">
                 <BadgeCheck className="h-4 w-4 shrink-0 text-cyan-brand sm:h-4.5 sm:w-4.5" aria-hidden="true" strokeWidth={2.5} />
                 <span className="whitespace-nowrap">ALL BRANDS ACCEPTED</span>
               </figcaption>
 
-              {/* INSTANT PAYMENT chip — top-right INSIDE the image on mobile (no overlap, no gap) */}
-              <div className="absolute right-3 top-14 z-10 sm:hidden">
+              {/* INSTANT PAYMENT chip — floating mid-right on mobile (below BEST PRICES, over image edge) */}
+              <div className="absolute -right-2 top-1/2 z-20 sm:hidden">
                 <div className="flex items-center gap-2 rounded-2xl bg-royal-800/95 px-3 py-2 text-white shadow-hero backdrop-blur">
                   <span className="animate-pulse-ring flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-brand text-royal-950">
                     <Zap className="h-4 w-4" aria-hidden="true" strokeWidth={2.5} />

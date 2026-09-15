@@ -13,17 +13,11 @@ const scrap = (name: string) => `${RAW}/images/${name}`;
 
 export const SCRAP_IMAGES = {
   copper: scrap("scrap-copper.jpg"),
-  aluminium: (() => {
-    const id = 28268141; // rows of aluminium can lids (stock)
-    return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600`;
-  })(),
+  aluminium: scrap("scrap-aluminium.jpg"),
   iron: scrap("scrap-iron.jpg"),
   brass: scrap("scrap-brass.jpg"),
   motors: scrap("scrap-motors.jpg"),
-  compressors: (() => {
-    const id = 29452977; // HVAC compressor / condenser unit (stock)
-    return `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=600`;
-  })(),
+  compressors: scrap("scrap-compressors.png"),
   steel: scrap("scrap-steel.jpg"),
   mixed: (() => {
     const id = 9742093; // mixed metal scrap pile (stock)
