@@ -120,13 +120,13 @@ export default function Hero() {
                 <span className="whitespace-nowrap">ALL BRANDS ACCEPTED</span>
               </figcaption>
 
-              {/* INSTANT PAYMENT chip — floating mid-right on mobile (below BEST PRICES, over image edge) */}
-              <div className="absolute -right-2 top-1/2 z-20 sm:hidden">
+              {/* INSTANT PAYMENT chip — floating mid-right on mobile (kept fully inside card) */}
+              <div className="absolute right-3 top-1/2 z-20 sm:hidden">
                 <div className="flex items-center gap-2 rounded-2xl bg-royal-800/95 px-3 py-2 text-white shadow-hero backdrop-blur">
                   <span className="animate-pulse-ring flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-brand text-royal-950">
                     <Zap className="h-4 w-4" aria-hidden="true" strokeWidth={2.5} />
                   </span>
-                  <span className="text-[10px] font-bold tracking-[0.12em]">INSTANT PAYMENT</span>
+                  <span className="whitespace-nowrap text-[10px] font-bold tracking-[0.12em]">INSTANT PAYMENT</span>
                 </div>
               </div>
             </figure>
