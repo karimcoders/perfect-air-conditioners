@@ -1,43 +1,58 @@
-import { Phone } from "lucide-react";
+import { PhoneCall } from "lucide-react";
 import Reveal from "./Reveal";
-import { PHONE_DISPLAY, PHONE_TEL } from "../lib/site";
+import { PHONE_DISPLAY, PHONE_TEL } from "../constants";
 
 export default function FinalCTA() {
   return (
-    <section className="relative overflow-hidden bg-royal py-20 text-white lg:py-24">
-      <div className="dot-grid-light pointer-events-none absolute inset-0" aria-hidden="true" />
-      <div
-        className="pointer-events-none absolute -left-20 bottom-[-90px] h-64 w-64 rounded-full border-[10px] border-white/10"
-        aria-hidden="true"
-      />
-      <div
-        className="pointer-events-none absolute right-[-70px] top-[-70px] h-56 w-56 rounded-full border-[10px] border-azure/25"
-        aria-hidden="true"
-      />
+    <section aria-labelledby="final-cta-heading" className="relative overflow-hidden bg-royal-900 py-20 lg:py-28">
+      {/* decorative layers */}
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0">
+        <div className="absolute inset-0 bg-[radial-gradient(90%_110%_at_50%_-10%,#1c49c5_0%,#0d2563_52%,#0a1a45_100%)]" />
+        <div className="dot-grid absolute inset-0 opacity-30 [mask-image:radial-gradient(55%_60%_at_50%_45%,black,transparent)]" />
+        <div className="absolute -left-28 top-1/2 h-80 w-80 -translate-y-1/2 rounded-full border-[30px] border-cyan-brand/10" />
+        <div className="absolute -right-24 top-1/2 h-96 w-96 -translate-y-1/2 rounded-full border-[38px] border-white/[0.07]" />
+      </div>
 
-      <div className="relative mx-auto max-w-[1200px] px-4 text-center sm:px-6">
+      <div className="relative mx-auto max-w-[820px] px-5 text-center sm:px-8">
         <Reveal>
-          <h2 className="text-4xl font-extrabold tracking-tight sm:text-5xl lg:text-6xl">
-            Got an old AC?
+          <h2
+            id="final-cta-heading"
+            className="text-[clamp(2.1rem,5.4vw,3.6rem)] font-extrabold leading-[1.08] tracking-tight text-white"
+          >
+            GOT AN OLD AC?
+            <span className="mt-1 block bg-gradient-to-r from-cyan-soft via-cyan-brand to-cyan-soft bg-clip-text text-transparent">
+              LET&rsquo;S TURN IT INTO CASH.
+            </span>
           </h2>
-          <p className="mt-2 text-3xl font-extrabold tracking-tight text-azure sm:text-4xl lg:text-5xl">
-            Let&apos;s turn it into cash.
-          </p>
-          <p className="mx-auto mt-6 max-w-xl text-[15px] leading-relaxed text-white/80 sm:text-base">
+        </Reveal>
+
+        <Reveal delay={120}>
+          <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/70">
             Call Perfect Air Conditioners today to discuss your old AC or scrap.
           </p>
+        </Reveal>
 
+        <Reveal delay={200}>
           <a
             href={PHONE_TEL}
-            className="pulse-ring mt-10 inline-flex items-center gap-3 rounded-2xl bg-white px-9 py-5 text-xl font-extrabold text-royal shadow-[0_26px_54px_-20px_rgba(0,0,0,0.55)] transition-all hover:-translate-y-1 hover:bg-ice sm:text-2xl"
+            className="group mt-9 inline-flex w-full items-center justify-center gap-3.5 rounded-2xl bg-white px-8 py-5 text-base font-extrabold tracking-wide text-royal-800 shadow-[0_24px_50px_-16px_rgb(0_0_0/0.5)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_32px_60px_-16px_rgb(0_0_0/0.6)] sm:w-auto sm:text-lg"
+            aria-label={`Call ${PHONE_DISPLAY}`}
           >
-            <Phone size={26} aria-hidden="true" />
+            <span className="animate-pulse-ring flex h-11 w-11 items-center justify-center rounded-full bg-royal-600 text-white transition-colors duration-300 group-hover:bg-royal-700">
+              <PhoneCall
+                className="h-5 w-5 transition-transform duration-300 group-hover:rotate-12"
+                aria-hidden="true"
+                strokeWidth={2.5}
+              />
+            </span>
             CALL {PHONE_DISPLAY}
           </a>
+        </Reveal>
 
-          <p className="mt-7 text-xs font-bold uppercase tracking-[0.2em] text-white/70">
-            Best Prices <span className="text-azure">•</span> Instant Payment{" "}
-            <span className="text-azure">•</span> Fast Service
+        <Reveal delay={280}>
+          <p className="mt-7 text-[11px] font-bold tracking-[0.22em] text-white/60">
+            BEST PRICES <span className="mx-1.5 text-cyan-brand">•</span> INSTANT PAYMENT{" "}
+            <span className="mx-1.5 text-cyan-brand">•</span> FAST SERVICE
           </p>
         </Reveal>
       </div>

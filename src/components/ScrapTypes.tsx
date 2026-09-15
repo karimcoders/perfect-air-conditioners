@@ -1,70 +1,72 @@
 import { Check } from "lucide-react";
 import Reveal from "./Reveal";
-import copperImg from "../assets/images/copper.jpg";
-import aluminiumImg from "../assets/images/aluminium.jpg";
-import ironImg from "../assets/images/iron.jpg";
-import brassImg from "../assets/images/brass.jpg";
-import motorsImg from "../assets/images/motors.jpg";
-import compressorsImg from "../assets/images/compressors.jpg";
-import steelImg from "../assets/images/steel.jpg";
-import otherImg from "../assets/images/other-metal-scrap.jpg";
+import { SCRAP_IMAGES } from "../lib/cdn";
 
-const TYPES = [
-  { name: "Copper", src: copperImg, alt: "Copper items with a warm metallic finish" },
-  { name: "Aluminium", src: aluminiumImg, alt: "Rows of aluminium can lids, silver metal" },
-  { name: "Iron", src: ironImg, alt: "Rusted iron metal surface" },
-  { name: "Brass", src: brassImg, alt: "Ornate golden brass metalwork" },
-  { name: "Motors", src: motorsImg, alt: "Mechanical motor parts and metal rings" },
-  { name: "Compressors", src: compressorsImg, alt: "Industrial HVAC compressor unit close-up" },
-  { name: "Steel", src: steelImg, alt: "Steel structure with a geometric pattern" },
-  { name: "Other Metal Scrap", src: otherImg, alt: "Aerial view of a mixed metal scrap pile" },
-];
+const {
+  copper: scrapCopper,
+  aluminium: scrapAluminium,
+  iron: scrapIron,
+  brass: scrapBrass,
+  motors: scrapMotors,
+  compressors: scrapCompressors,
+  steel: scrapSteel,
+  mixed: scrapMixed,
+} = SCRAP_IMAGES;
+
+const SCRAPS = [
+  { name: "Copper", img: scrapCopper, alt: "Copper scrap pipes and fittings" },
+  { name: "Aluminium", img: scrapAluminium, alt: "Aluminium scrap profiles and sheets" },
+  { name: "Iron", img: scrapIron, alt: "Iron scrap metal pieces" },
+  { name: "Brass", img: scrapBrass, alt: "Brass scrap valves and connectors" },
+  { name: "Motors", img: scrapMotors, alt: "Old electric motor scrap with copper windings" },
+  { name: "Compressors", img: scrapCompressors, alt: "Used AC compressor scrap units" },
+  { name: "Steel", img: scrapSteel, alt: "Stainless steel scrap sheets and pipes" },
+  { name: "Other Metal Scrap", img: scrapMixed, alt: "Mixed metal scrap collection" },
+] as const;
 
 export default function ScrapTypes() {
   return (
-    <section id="scrap-types" className="bg-mist py-20 lg:py-24">
-      <div className="mx-auto max-w-[1200px] px-4 sm:px-6">
+    <section id="scrap-types" className="scroll-mt-24 bg-mist py-16 lg:py-24">
+      <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-azure-deep">
-            Scrap Categories
-          </p>
-          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-ink sm:text-[40px] sm:leading-[1.1]">
-            We also buy all types of scraps
+          <p className="text-[13.5px] font-bold tracking-[0.2em] text-cyan-brand">METAL SCRAP</p>
+          <h2 className="mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl">
+            WE ALSO BUY ALL TYPES OF SCRAPS
           </h2>
-          <p className="mt-4 text-base leading-relaxed text-slate-blue">
-            From copper to compressors — if it&apos;s metal, talk to us before you throw it away.
+          <p className="mt-4 text-[15px] leading-relaxed text-ink/60">
+            Along with your old AC, we purchase common ferrous and non-ferrous metals.
           </p>
         </Reveal>
 
-        <ul className="mt-14 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 lg:grid-cols-4">
-          {TYPES.map((type, i) => (
-            <Reveal key={type.name} delay={(i % 4) * 80}>
-              <li className="group flex flex-col items-center text-center">
-                <div className="relative">
-                  <div className="overflow-hidden rounded-full ring-4 ring-white shadow-[0_18px_38px_-18px_rgba(8,29,82,0.45)] transition-shadow duration-300 group-hover:shadow-[0_24px_46px_-18px_rgba(23,71,181,0.5)]">
-                    <img
-                      src={type.src}
-                      alt={type.alt}
-                      width={320}
-                      height={320}
-                      loading="lazy"
-                      className="h-24 w-24 object-cover transition-transform duration-500 group-hover:scale-110 sm:h-28 sm:w-28"
-                    />
-                  </div>
-                  <span
-                    className="absolute bottom-0.5 right-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-azure text-white shadow ring-2 ring-white"
+        <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-4 sm:gap-x-6 lg:mt-14">
+          {SCRAPS.map((scrap, i) => (
+            <Reveal key={scrap.name} delay={(i % 4) * 80}>
+              <figure className="group text-center">
+                <div className="relative mx-auto aspect-square w-full max-w-[190px]">
+                  <div
                     aria-hidden="true"
-                  >
-                    <Check size={14} strokeWidth={3.5} />
+                    className="absolute inset-0 rounded-full bg-gradient-to-br from-royal-600 to-cyan-brand opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-30"
+                  />
+                  <img
+                    src={scrap.img}
+                    alt={scrap.alt}
+                    width={380}
+                    height={380}
+                    loading="lazy"
+                    decoding="async"
+                    className="relative h-full w-full rounded-full object-cover shadow-card ring-4 ring-white transition-all duration-500 group-hover:scale-[1.06] group-hover:shadow-card-hover group-hover:ring-cyan-brand/40"
+                  />
+                  <span className="absolute -bottom-1 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-royal-600 text-white shadow-md ring-4 ring-mist transition-colors duration-300 group-hover:bg-cyan-brand">
+                    <Check className="h-4 w-4" aria-hidden="true" strokeWidth={3} />
                   </span>
                 </div>
-                <p className="mt-4 text-sm font-bold uppercase tracking-[0.08em] text-ink transition-colors group-hover:text-royal">
-                  {type.name}
-                </p>
-              </li>
+                <figcaption className="mt-4 text-[12.5px] font-bold uppercase tracking-[0.14em] text-royal-800">
+                  {scrap.name}
+                </figcaption>
+              </figure>
             </Reveal>
           ))}
-        </ul>
+        </div>
       </div>
     </section>
   );
