@@ -6,7 +6,7 @@ const RAW =
 export const LOGO_URL = `${RAW}/Logo.png`;
 export const FAVICON_URL = `${RAW}/favicon.png`;
 
-export const HERO_AC_PILE = `${RAW}/images/hero-ac-scrap.jpg`;
+export const HERO_AC_PILE = `${RAW}/images/hero-ac-pile.jpg`;
 
 export const SCRAP_IMAGES = {
   copper: `${RAW}/images/copper.jpg`,
