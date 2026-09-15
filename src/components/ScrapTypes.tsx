@@ -1,4 +1,5 @@
-import { Check } from "lucide-react";
+import { useState, useEffect, useCallback } from "react";
+import { Check, X, ZoomIn } from "lucide-react";
 import Reveal from "./Reveal";
 import { SCRAP_IMAGES } from "../lib/cdn";
 
@@ -24,7 +25,25 @@ const SCRAPS = [
   { name: "Other Metal Scrap", img: scrapMixed, alt: "Mixed metal scrap collection" },
 ] as const;
 
+type ScrapItem = (typeof SCRAPS)[number];
+
 export default function ScrapTypes() {
+  const [active, setActive] = useState<ScrapItem | null>(null);
+
+  const close = useCallback(() => setActive(null), []);
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") close();
+    };
+    document.addEventListener("keydown", onKey);
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = "";
+    };
+  }, [active, close]);
+
   return (
     <section id="scrap-types" className="scroll-mt-24 bg-mist py-16 lg:py-24">
       <div className="mx-auto max-w-[1200px] px-5 sm:px-8">
@@ -34,7 +53,8 @@ export default function ScrapTypes() {
             WE ALSO BUY ALL TYPES OF SCRAPS
           </h2>
           <p className="mt-4 text-[15px] leading-relaxed text-ink/60">
-            Along with your old AC, we purchase common ferrous and non-ferrous metals.
+            Along with your old AC, we purchase common ferrous and non-ferrous metals. Tap a photo
+            to view it full size.
           </p>
         </Reveal>
 
@@ -42,7 +62,12 @@ export default function ScrapTypes() {
           {SCRAPS.map((scrap, i) => (
             <Reveal key={scrap.name} delay={(i % 4) * 80}>
               <figure className="group flex flex-col items-center text-center">
-                <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setActive(scrap)}
+                  aria-label={`View ${scrap.name} scrap photo full size`}
+                  className="relative cursor-zoom-in rounded-full outline-none focus-visible:ring-4 focus-visible:ring-cyan-brand/40"
+                >
                   <div className="overflow-hidden rounded-full bg-white shadow-card ring-4 ring-white transition-shadow duration-300 group-hover:shadow-card-hover">
                     <img
                       src={scrap.img}
@@ -57,7 +82,11 @@ export default function ScrapTypes() {
                   <span className="absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-cyan-brand text-royal-950 shadow ring-2 ring-white lg:h-11 lg:w-11">
                     <Check className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" strokeWidth={3.5} />
                   </span>
-                </div>
+                  {/* zoom hint on hover (desktop) */}
+                  <span className="pointer-events-none absolute inset-0 hidden items-center justify-center rounded-full bg-royal-950/35 opacity-0 transition-opacity duration-300 group-hover:opacity-100 sm:flex">
+                    <ZoomIn className="h-9 w-9 text-white drop-shadow" aria-hidden="true" />
+                  </span>
+                </button>
                 <figcaption className="mt-5 text-sm font-bold uppercase tracking-[0.1em] text-royal-800 transition-colors group-hover:text-royal-600 sm:text-[15px]">
                   {scrap.name}
                 </figcaption>
@@ -66,6 +95,39 @@ export default function ScrapTypes() {
           ))}
         </div>
       </div>
+
+      {/* Fullscreen lightbox */}
+      {active && (
+        <div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-royal-950/90 p-4 backdrop-blur-sm sm:p-8"
+          onClick={close}
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${active.name} scrap photo`}
+        >
+          <button
+            type="button"
+            onClick={close}
+            aria-label="Close full image"
+            className="absolute right-4 top-4 z-10 flex h-11 w-11 items-center justify-center rounded-full bg-white/15 text-white transition hover:bg-white/30 sm:right-6 sm:top-6"
+          >
+            <X className="h-6 w-6" aria-hidden="true" />
+          </button>
+          <figure
+            className="flex max-h-full max-w-4xl flex-col items-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <img
+              src={active.img}
+              alt={active.alt}
+              className="max-h-[82vh] w-auto max-w-full rounded-2xl object-contain shadow-2xl"
+            />
+            <figcaption className="mt-4 rounded-full bg-white/10 px-5 py-2 text-sm font-bold uppercase tracking-[0.15em] text-white">
+              {active.name}
+            </figcaption>
+          </figure>
+        </div>
+      )}
     </section>
   );
 }
