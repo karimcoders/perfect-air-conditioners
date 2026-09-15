@@ -1,5 +1,5 @@
-// Brand + photo assets live in the project's own GitHub repository.
-// LOGO_URL is the client's EXACT uploaded logo file ("Logo PNG.png", ~521 KB).
+// Brand + photo assets.
+// Logo lives in the project's own GitHub repository (client's exact Logo.png).
 const RAW =
   "https://raw.githubusercontent.com/karimcoders/perfect-air-conditioners/main/src/assets";
 
@@ -8,13 +8,18 @@ export const FAVICON_URL = `${RAW}/favicon.png`;
 
 export const HERO_AC_PILE = `${RAW}/images/hero-ac-pile.jpg`;
 
+// Scrap category photos — the ORIGINAL Pexels photos Option A selected
+// (full photos, no aggressive square crop; the circle crops in CSS).
+const px = (id: number) =>
+  `https://images.pexels.com/photos/${id}/pexels-photo-${id}.jpeg?auto=compress&cs=tinysrgb&w=500`;
+
 export const SCRAP_IMAGES = {
-  copper: `${RAW}/images/copper.jpg`,
-  aluminium: `${RAW}/images/aluminium.jpg`,
-  iron: `${RAW}/images/iron.jpg`,
-  brass: `${RAW}/images/brass.jpg`,
-  motors: `${RAW}/images/motors.jpg`,
-  compressors: `${RAW}/images/compressors.jpg`,
-  steel: `${RAW}/images/steel.jpg`,
-  mixed: `${RAW}/images/other-metal-scrap.jpg`,
+  copper: px(9432572),
+  aluminium: px(28268141),
+  iron: px(23482502),
+  brass: px(37441612),
+  motors: px(12093056),
+  compressors: px(29452977),
+  steel: px(35898707),
+  mixed: px(9742093),
 } as const;
