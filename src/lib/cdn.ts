@@ -16,7 +16,7 @@ export const SCRAP_IMAGES = {
   copper: px(5279317), // tangled copper wire ready for recycling
   aluminium: px(28268141), // rows of aluminium can lids
   iron: px(21470313), // heap of rusty iron / auto parts in junkyard
-  brass: px(14593018), // pile of golden brass screws & nuts
+  brass: `${RAW}/images/scrap-brass.png`, // real pile of old brass taps/fittings (client photo)
   motors: px(36772465), // heap of old mechanical motor gears in junkyard
   compressors: px(29452977), // HVAC compressor / condenser unit
   steel: px(9784001), // aerial view of scrap steel piles in a junkyard
