@@ -77,7 +77,7 @@ export default function Footer() {
 
         <div className="mt-12 flex flex-col items-center justify-between gap-3 border-t border-white/10 pt-6 sm:flex-row sm:gap-6">
           <p className="text-center text-xs text-white/45 sm:text-left">
-            © 2026 {BUSINESS_NAME}. All rights reserved.
+            © 2026 Perfect Scrap Deals. All rights reserved.
           </p>
           <p className="text-center text-xs text-white/60 sm:text-right">
             Developed and managed by{" "}
