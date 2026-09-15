@@ -47,18 +47,18 @@ export default function ScrapTypes() {
                     <img
                       src={scrap.img}
                       alt={scrap.alt}
-                      width={400}
-                      height={400}
+                      width={600}
+                      height={600}
                       loading="lazy"
                       decoding="async"
-                      className="h-28 w-28 object-cover transition-transform duration-500 group-hover:scale-110 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
+                      className="h-32 w-32 object-cover transition-transform duration-500 group-hover:scale-110 sm:h-40 sm:w-40 lg:h-44 lg:w-44"
                     />
                   </div>
-                  <span className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-brand text-royal-950 shadow ring-2 ring-white lg:h-9 lg:w-9">
-                    <Check className="h-4 w-4" aria-hidden="true" strokeWidth={3.5} />
+                  <span className="absolute bottom-0 right-0 flex h-9 w-9 items-center justify-center rounded-full bg-cyan-brand text-royal-950 shadow ring-2 ring-white lg:h-11 lg:w-11">
+                    <Check className="h-4 w-4 lg:h-5 lg:w-5" aria-hidden="true" strokeWidth={3.5} />
                   </span>
                 </div>
-                <figcaption className="mt-4 text-[13px] font-bold uppercase tracking-[0.1em] text-royal-800 transition-colors group-hover:text-royal-600">
+                <figcaption className="mt-5 text-sm font-bold uppercase tracking-[0.1em] text-royal-800 transition-colors group-hover:text-royal-600 sm:text-[15px]">
                   {scrap.name}
                 </figcaption>
               </figure>
