@@ -47,15 +47,15 @@ export default function ScrapTypes() {
                     <img
                       src={scrap.img}
                       alt={scrap.alt}
-                      width={320}
-                      height={320}
+                      width={400}
+                      height={400}
                       loading="lazy"
                       decoding="async"
-                      className="h-24 w-24 object-cover transition-transform duration-500 group-hover:scale-110 sm:h-28 sm:w-28"
+                      className="h-28 w-28 object-cover transition-transform duration-500 group-hover:scale-110 sm:h-32 sm:w-32 lg:h-36 lg:w-36"
                     />
                   </div>
-                  <span className="absolute -bottom-0.5 right-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-cyan-brand text-royal-950 shadow ring-2 ring-white">
-                    <Check className="h-3.5 w-3.5" aria-hidden="true" strokeWidth={3.5} />
+                  <span className="absolute bottom-0 right-0 flex h-8 w-8 items-center justify-center rounded-full bg-cyan-brand text-royal-950 shadow ring-2 ring-white lg:h-9 lg:w-9">
+                    <Check className="h-4 w-4" aria-hidden="true" strokeWidth={3.5} />
                   </span>
                 </div>
                 <figcaption className="mt-4 text-[13px] font-bold uppercase tracking-[0.1em] text-royal-800 transition-colors group-hover:text-royal-600">
