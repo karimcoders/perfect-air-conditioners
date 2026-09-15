@@ -115,21 +115,21 @@ export default function Hero() {
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-royal-950/30 to-transparent"
               />
-              <figcaption className="absolute bottom-3 left-3 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full bg-white/95 py-2 pl-3 pr-3.5 text-[12px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur sm:bottom-1.5 sm:left-4 sm:pr-4.5 sm:text-[13px]">
+              <figcaption className="absolute bottom-3 left-3 z-10 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full bg-white/95 py-2 pl-3 pr-3.5 text-[12px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur sm:bottom-1.5 sm:left-4 sm:pr-4.5 sm:text-[13px]">
                 <BadgeCheck className="h-4 w-4 shrink-0 text-cyan-brand sm:h-4.5 sm:w-4.5" aria-hidden="true" strokeWidth={2.5} />
                 <span className="whitespace-nowrap">ALL BRANDS ACCEPTED</span>
               </figcaption>
-            </figure>
 
-            {/* payment chip in normal flow on mobile (no overlap) */}
-            <div className="mt-4 flex justify-end sm:hidden">
-              <div className="flex items-center gap-2.5 rounded-2xl bg-royal-800 px-4 py-3 text-white shadow-hero">
-                <span className="animate-pulse-ring flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-brand text-royal-950">
-                  <Zap className="h-4.5 w-4.5" aria-hidden="true" strokeWidth={2.5} />
-                </span>
-                <span className="text-[10.5px] font-bold tracking-[0.14em]">INSTANT PAYMENT</span>
+              {/* INSTANT PAYMENT chip — top-right INSIDE the image on mobile (no overlap, no gap) */}
+              <div className="absolute right-3 top-14 z-10 sm:hidden">
+                <div className="flex items-center gap-2 rounded-2xl bg-royal-800/95 px-3 py-2 text-white shadow-hero backdrop-blur">
+                  <span className="animate-pulse-ring flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-brand text-royal-950">
+                    <Zap className="h-4 w-4" aria-hidden="true" strokeWidth={2.5} />
+                  </span>
+                  <span className="text-[10px] font-bold tracking-[0.12em]">INSTANT PAYMENT</span>
+                </div>
               </div>
-            </div>
+            </figure>
 
             {/* floating perks chip — same format as INSTANT PAYMENT */}
             <div className="animate-float absolute -left-3 -top-6">
