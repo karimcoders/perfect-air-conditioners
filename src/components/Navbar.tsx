@@ -23,6 +23,14 @@ export default function Navbar() {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
+  // Lock background scroll while the mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? "hidden" : "";
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [open]);
+
   return (
     <header
       className={cn(

@@ -36,6 +36,13 @@ export default function QuoteForm() {
 
   function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    // Normalise + validate the phone (digits only, accept leading + and 00)
+    const digits = phone.replace(/[\s-]/g, "");
+    const valid = /^(\+?\d{10,13}|00\d{10,13})$/.test(digits);
+    if (!name.trim() || !valid) {
+      e.currentTarget.reportValidity();
+      return;
+    }
     setClientName(name.trim().split(" ")[0] || "there");
     setClientCategory(category);
     setSubmitted(true);
@@ -158,6 +165,8 @@ export default function QuoteForm() {
                         value={name}
                         onChange={(e) => setName(e.target.value)}
                         placeholder="e.g. Rahul Kumar"
+                        maxLength={80}
+                        autoCapitalize="words"
                         className={inputClass}
                       />
                     </div>
@@ -175,7 +184,9 @@ export default function QuoteForm() {
                         minLength={10}
                         maxLength={15}
                         pattern="[0-9+\-\s]{10,15}"
-                        title="Enter a valid phone number (10–15 digits)"
+                        title="Enter a valid 10 digit phone number"
+                        autoCapitalize="off"
+                        spellCheck={false}
                         value={phone}
                         onChange={(e) => setPhone(e.target.value)}
                         placeholder="e.g. 98765 43210"
@@ -210,6 +221,7 @@ export default function QuoteForm() {
                         name="message"
                         rows={3}
                         value={message}
+                        maxLength={600}
                         onChange={(e) => setMessage(e.target.value)}
                         placeholder="e.g. 2 old split ACs, 1 window AC + some copper pipe"
                         className={`${inputClass} resize-none`}
