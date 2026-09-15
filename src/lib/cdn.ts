@@ -17,8 +17,8 @@ export const SCRAP_IMAGES = {
   aluminium: px(28268141), // rows of aluminium can lids
   iron: px(21470313), // heap of rusty iron / auto parts in junkyard
   brass: `${RAW}/images/scrap-brass.png`, // real pile of old brass taps/fittings (client photo)
-  motors: px(36772465), // heap of old mechanical motor gears in junkyard
+  motors: `${RAW}/images/scrap-motors.png`, // client photo — electric motors scrap
   compressors: px(29452977), // HVAC compressor / condenser unit
-  steel: px(9784001), // aerial view of scrap steel piles in a junkyard
+  steel: `${RAW}/images/scrap-steel.png`, // client photo — steel scrap
   mixed: px(9742093), // mixed metal scrap pile
 } as const;

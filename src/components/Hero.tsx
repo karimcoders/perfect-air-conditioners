@@ -115,7 +115,7 @@ export default function Hero() {
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-royal-950/30 to-transparent"
               />
-              <figcaption className="absolute bottom-3 left-3 z-10 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full bg-white/95 py-2 pl-3 pr-3.5 text-[12px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur sm:bottom-1.5 sm:left-4 sm:pr-4.5 sm:text-[13px]">
+              <figcaption className="absolute inset-x-3 bottom-3 z-10 flex items-center justify-center gap-2 rounded-full bg-white/95 py-2.5 pl-3 pr-3 text-[12px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur sm:inset-x-auto sm:bottom-1.5 sm:left-4 sm:justify-start sm:py-2 sm:pr-4.5 sm:text-[13px]">
                 <BadgeCheck className="h-4 w-4 shrink-0 text-cyan-brand sm:h-4.5 sm:w-4.5" aria-hidden="true" strokeWidth={2.5} />
                 <span className="whitespace-nowrap">ALL BRANDS ACCEPTED</span>
               </figcaption>
