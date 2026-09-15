@@ -38,29 +38,27 @@ export default function ScrapTypes() {
           </p>
         </Reveal>
 
-        <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-9 sm:grid-cols-4 sm:gap-x-6 lg:mt-14">
+        <div className="mt-12 grid grid-cols-2 gap-x-4 gap-y-10 sm:grid-cols-3 sm:gap-x-6 lg:mt-14 lg:grid-cols-4">
           {SCRAPS.map((scrap, i) => (
             <Reveal key={scrap.name} delay={(i % 4) * 80}>
-              <figure className="group text-center">
-                <div className="relative mx-auto aspect-square w-full max-w-[190px]">
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0 rounded-full bg-gradient-to-br from-royal-600 to-cyan-brand opacity-0 blur-md transition-opacity duration-300 group-hover:opacity-30"
-                  />
-                  <img
-                    src={scrap.img}
-                    alt={scrap.alt}
-                    width={380}
-                    height={380}
-                    loading="lazy"
-                    decoding="async"
-                    className="relative h-full w-full rounded-full object-cover shadow-card ring-4 ring-white transition-all duration-500 group-hover:scale-[1.06] group-hover:shadow-card-hover group-hover:ring-cyan-brand/40"
-                  />
-                  <span className="absolute -bottom-1 right-2 flex h-8 w-8 items-center justify-center rounded-full bg-royal-600 text-white shadow-md ring-4 ring-mist transition-colors duration-300 group-hover:bg-cyan-brand">
-                    <Check className="h-4 w-4" aria-hidden="true" strokeWidth={3} />
+              <figure className="group flex flex-col items-center text-center">
+                <div className="relative">
+                  <div className="overflow-hidden rounded-full bg-white shadow-card ring-4 ring-white transition-shadow duration-300 group-hover:shadow-card-hover">
+                    <img
+                      src={scrap.img}
+                      alt={scrap.alt}
+                      width={320}
+                      height={320}
+                      loading="lazy"
+                      decoding="async"
+                      className="h-24 w-24 object-cover transition-transform duration-500 group-hover:scale-110 sm:h-28 sm:w-28"
+                    />
+                  </div>
+                  <span className="absolute -bottom-0.5 right-0.5 flex h-7 w-7 items-center justify-center rounded-full bg-cyan-brand text-royal-950 shadow ring-2 ring-white">
+                    <Check className="h-3.5 w-3.5" aria-hidden="true" strokeWidth={3.5} />
                   </span>
                 </div>
-                <figcaption className="mt-4 text-[12.5px] font-bold uppercase tracking-[0.14em] text-royal-800">
+                <figcaption className="mt-4 text-[13px] font-bold uppercase tracking-[0.1em] text-royal-800 transition-colors group-hover:text-royal-600">
                   {scrap.name}
                 </figcaption>
               </figure>
