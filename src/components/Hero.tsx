@@ -115,11 +115,21 @@ export default function Hero() {
                 aria-hidden="true"
                 className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-royal-950/30 to-transparent"
               />
-              <figcaption className="absolute bottom-1.5 left-4 flex items-center gap-2 rounded-full bg-white/95 py-2 pl-3.5 pr-4.5 text-[13px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur">
-                <BadgeCheck className="h-4.5 w-4.5 text-cyan-brand" aria-hidden="true" strokeWidth={2.5} />
-                ALL BRANDS ACCEPTED
+              <figcaption className="absolute bottom-3 left-3 flex max-w-[calc(100%-1.5rem)] items-center gap-2 rounded-full bg-white/95 py-2 pl-3 pr-3.5 text-[12px] font-bold tracking-wide text-royal-800 shadow-card backdrop-blur sm:bottom-1.5 sm:left-4 sm:pr-4.5 sm:text-[13px]">
+                <BadgeCheck className="h-4 w-4 shrink-0 text-cyan-brand sm:h-4.5 sm:w-4.5" aria-hidden="true" strokeWidth={2.5} />
+                <span className="whitespace-nowrap">ALL BRANDS ACCEPTED</span>
               </figcaption>
             </figure>
+
+            {/* payment chip in normal flow on mobile (no overlap) */}
+            <div className="mt-4 flex justify-end sm:hidden">
+              <div className="flex items-center gap-2.5 rounded-2xl bg-royal-800 px-4 py-3 text-white shadow-hero">
+                <span className="animate-pulse-ring flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-brand text-royal-950">
+                  <Zap className="h-4.5 w-4.5" aria-hidden="true" strokeWidth={2.5} />
+                </span>
+                <span className="text-[10.5px] font-bold tracking-[0.14em]">INSTANT PAYMENT</span>
+              </div>
+            </div>
 
             {/* floating perks chip — same format as INSTANT PAYMENT */}
             <div className="animate-float absolute -left-3 -top-6">
@@ -133,8 +143,8 @@ export default function Hero() {
               </div>
             </div>
 
-            {/* floating payment chip — shifted right (~30% hanging outside the image card) */}
-            <div className="animate-float-slow absolute -bottom-6 -right-6 sm:-right-10">
+            {/* floating payment chip — desktop only (mobile uses in-flow chip below) */}
+            <div className="animate-float-slow absolute -bottom-6 -right-6 hidden sm:block sm:-right-10">
               <div className="flex items-center gap-2.5 rounded-2xl bg-royal-800 px-4 py-3 text-white shadow-hero">
                 <span className="animate-pulse-ring flex h-9 w-9 items-center justify-center rounded-full bg-cyan-brand text-royal-950">
                   <Zap className="h-4.5 w-4.5" aria-hidden="true" strokeWidth={2.5} />
