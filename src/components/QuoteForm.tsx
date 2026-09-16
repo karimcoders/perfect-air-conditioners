@@ -1,7 +1,8 @@
 import { useRef, useState, type FormEvent } from "react";
-import { BadgeCheck, CheckCircle2, Clock, PhoneCall, Send, Zap } from "lucide-react";
+import { BadgeCheck, CheckCircle2, Clock, Loader2, PhoneCall, Send, Zap } from "lucide-react";
 import Reveal from "./Reveal";
 import { PHONE_DISPLAY, PHONE_TEL } from "../constants";
+import { BUSINESS_EMAIL, LEAD_EMAILS, FORM_ENDPOINT } from "../lib/site";
 
 const SCRAP_OPTIONS = [
   "Old / Dead AC (Split)",
@@ -30,11 +31,13 @@ export default function QuoteForm() {
   const [category, setCategory] = useState<string>(SCRAP_OPTIONS[0]);
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [error, setError] = useState("");
   const [clientName, setClientName] = useState("");
   const [clientCategory, setClientCategory] = useState("");
   const statusRef = useRef<HTMLDivElement>(null);
 
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
     // Normalise + validate the phone (digits only, accept leading + and 00)
     const digits = phone.replace(/[\s-]/g, "");
@@ -43,6 +46,41 @@ export default function QuoteForm() {
       e.currentTarget.reportValidity();
       return;
     }
+
+    setError("");
+    setSending(true);
+    try {
+      // Key-free endpoint (FormSubmit AJAX). First submission sends a one-time
+      // activation email; after confirming once, every lead is delivered.
+      const res = await fetch(FORM_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({
+          name: name.trim(),
+          phone: phone.trim(),
+          category,
+          details: message.trim() || "—",
+          // Deliver a copy to every configured inbox (business + testing)
+          _cc: LEAD_EMAILS.slice(1).join(","),
+          _subject: `New scrap enquiry: ${category} — ${name.trim()}`,
+          _template: "table",
+          _captcha: "false",
+          botcheck: "", // honeypot
+        }),
+      });
+      const data = await res.json().catch(() => null);
+      if (!res.ok || data?.success === false) {
+        throw new Error(data?.message || "Submission failed");
+      }
+    } catch {
+      setSending(false);
+      setError(
+        "Couldn't send the request online. Please call us directly — tap CALL NOW."
+      );
+      return;
+    }
+    setSending(false);
+
     setClientName(name.trim().split(" ")[0] || "there");
     setClientCategory(category);
     setSubmitted(true);
@@ -144,6 +182,15 @@ export default function QuoteForm() {
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} noValidate={false}>
+                  {/* Honeypot anti-spam field (hidden from humans) */}
+                  <input
+                    type="checkbox"
+                    name="botcheck"
+                    tabIndex={-1}
+                    autoComplete="off"
+                    aria-hidden="true"
+                    className="pointer-events-none absolute left-[-9999px] h-0 w-0 opacity-0"
+                  />
                   <h3 className="text-lg font-extrabold tracking-tight text-navy">
                     Tell us what you want to sell
                   </h3>
@@ -231,20 +278,38 @@ export default function QuoteForm() {
 
                   <button
                     type="submit"
-                    className="group mt-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-royal-600 px-7 py-4 text-sm font-bold tracking-wide text-white shadow-[0_18px_38px_-14px_rgb(28_73_197/0.75)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-royal-700"
+                    disabled={sending}
+                    className="group mt-6 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-royal-600 px-7 py-4 text-sm font-bold tracking-wide text-white shadow-[0_18px_38px_-14px_rgb(28_73_197/0.75)] transition-all duration-300 hover:-translate-y-0.5 hover:bg-royal-700 disabled:cursor-not-allowed disabled:opacity-70 disabled:hover:translate-y-0"
                   >
-                    <Send
-                      className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
-                      aria-hidden="true"
-                      strokeWidth={2.5}
-                    />
-                    REQUEST A CALLBACK
+                    {sending ? (
+                      <>
+                        <Loader2 className="h-4.5 w-4.5 animate-spin" aria-hidden="true" />
+                        SENDING…
+                      </>
+                    ) : (
+                      <>
+                        <Send
+                          className="h-4.5 w-4.5 transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-0.5"
+                          aria-hidden="true"
+                          strokeWidth={2.5}
+                        />
+                        REQUEST A CALLBACK
+                      </>
+                    )}
                   </button>
+                  {error && (
+                    <p role="alert" className="mt-4 rounded-xl bg-red-50 px-4 py-3 text-center text-[12px] font-semibold leading-relaxed text-red-700">
+                      {error}
+                    </p>
+                  )}
                   <p className="mt-4 text-center text-[11px] leading-relaxed text-ink/45">
                     Or call directly:{" "}
                     <a href={PHONE_TEL} className="font-bold text-royal-700 hover:underline">
                       {PHONE_DISPLAY}
                     </a>
+                  </p>
+                  <p className="mt-2 text-center text-[10px] leading-relaxed text-ink/35">
+                    Your request is emailed to our team at {BUSINESS_EMAIL}.
                   </p>
                 </form>
               )}
