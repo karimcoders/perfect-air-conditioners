@@ -12,6 +12,7 @@ import WhyChooseUs from "./components/WhyChooseUs";
 import QuoteForm from "./components/QuoteForm";
 import FinalCTA from "./components/FinalCTA";
 import Footer from "./components/Footer";
+import FloatingWhatsApp from "./components/FloatingWhatsApp";
 import { PHONE_DISPLAY, PHONE_TEL } from "./constants";
 import { cn } from "./utils/cn";
 
@@ -79,6 +80,7 @@ export default function App() {
 
       <Footer />
       <FloatingCallButton />
+      <FloatingWhatsApp />
     </>
   );
 }
