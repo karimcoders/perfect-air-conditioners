@@ -42,7 +42,7 @@ export default function Navbar() {
         className="mx-auto flex h-20 max-w-[1200px] items-center justify-between px-5 sm:px-8 lg:h-[88px]"
         aria-label="Main navigation"
       >
-        <a href="#home" aria-label="Perfect Air Conditioners — home" className="shrink-0">
+        <a href="#home" aria-label="Perfect Scrap Deals — home" className="shrink-0">
           <Logo className="h-14 sm:h-16 lg:h-[76px]" />
         </a>
 

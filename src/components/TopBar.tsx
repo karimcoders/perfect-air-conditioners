@@ -12,7 +12,7 @@ export default function TopBar() {
         <a
           href={PHONE_TEL}
           className="flex shrink-0 items-center gap-2 rounded-full text-[11px] font-semibold tracking-wide text-cyan-soft transition-colors hover:text-white sm:text-xs"
-          aria-label={`Call Perfect Air Conditioners at ${PHONE_DISPLAY}`}
+          aria-label={`Call Perfect Scrap Deals at ${PHONE_DISPLAY}`}
         >
           <PhoneCall className="h-3.5 w-3.5" aria-hidden="true" strokeWidth={2.5} />
           <span className="tabular-nums">Call: {PHONE_DISPLAY}</span>

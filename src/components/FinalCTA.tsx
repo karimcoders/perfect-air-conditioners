@@ -28,7 +28,7 @@ export default function FinalCTA() {
 
         <Reveal delay={120}>
           <p className="mx-auto mt-5 max-w-md text-[15px] leading-relaxed text-white/70">
-            Call Perfect Air Conditioners today to discuss your old AC or scrap.
+            Call Perfect Scrap Deals today to discuss your old AC or scrap.
           </p>
         </Reveal>
 

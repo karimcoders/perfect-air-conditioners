@@ -34,7 +34,7 @@ export default function WhyChooseUs() {
             id="why-heading"
             className="mt-3 text-3xl font-extrabold tracking-tight text-navy sm:text-4xl"
           >
-            Why choose Perfect Air Conditioners?
+            Why choose Perfect Scrap Deals?
           </h2>
         </Reveal>
 

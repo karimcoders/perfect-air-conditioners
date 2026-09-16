@@ -1,6 +1,6 @@
 export const PHONE_DISPLAY = "084988 46505";
 export const PHONE_TEL = "tel:08498846505";
-export const BUSINESS_NAME = "Perfect Air Conditioners";
+export const BUSINESS_NAME = "Perfect Scrap Deals";
 
 export const NAV_LINKS = [
   { label: "Home", href: "#home" },
