@@ -47,39 +47,57 @@ export default function QuoteForm() {
       return;
     }
 
+    const leadBody = [
+      "New scrap pickup enquiry",
+      "",
+      `Name: ${name.trim()}`,
+      `Phone: ${phone.trim()}`,
+      `Selling: ${category}`,
+      `Details: ${message.trim() || "—"}`,
+      "",
+      "Sent from the Perfect Scrap Deals website.",
+    ].join("\n");
+    const subject = `New scrap enquiry: ${category} — ${name.trim()}`;
+
     setError("");
     setSending(true);
+    let emailed = false;
     try {
-      // Key-free endpoint (FormSubmit AJAX). First submission sends a one-time
-      // activation email; after confirming once, every lead is delivered.
+      // Try the key-free endpoint first (delivers automatically once activated).
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 6000);
       const res = await fetch(FORM_ENDPOINT, {
         method: "POST",
+        signal: controller.signal,
         headers: { "Content-Type": "application/json", Accept: "application/json" },
         body: JSON.stringify({
           name: name.trim(),
           phone: phone.trim(),
           category,
           details: message.trim() || "—",
-          // Deliver a copy to every configured inbox (business + testing)
           _cc: LEAD_EMAILS.slice(1).join(","),
-          _subject: `New scrap enquiry: ${category} — ${name.trim()}`,
+          _subject: subject,
           _template: "table",
           _captcha: "false",
-          botcheck: "", // honeypot
+          botcheck: "",
         }),
       });
+      clearTimeout(timeout);
       const data = await res.json().catch(() => null);
-      if (!res.ok || data?.success === false) {
-        throw new Error(data?.message || "Submission failed");
-      }
+      emailed = Boolean(res.ok && data?.success !== false);
     } catch {
-      setSending(false);
-      setError(
-        "Couldn't send the request online. Please call us directly — tap CALL NOW."
-      );
-      return;
+      emailed = false;
     }
     setSending(false);
+
+    // Guaranteed fallback: open the visitor's email app with everything filled.
+    if (!emailed) {
+      const mailto =
+        `mailto:${LEAD_EMAILS.join(",")}` +
+        `?subject=${encodeURIComponent(subject)}` +
+        `&body=${encodeURIComponent(leadBody)}`;
+      window.location.href = mailto;
+    }
 
     setClientName(name.trim().split(" ")[0] || "there");
     setClientCategory(category);
@@ -162,14 +180,26 @@ export default function QuoteForm() {
                     Your request for <span className="font-bold text-royal-700">{clientCategory}</span>{" "}
                     is ready. Call us now and mention your details to get an instant quote.
                   </p>
-                  <a
-                    href={PHONE_TEL}
-                    className="mt-7 inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-royal-600 px-7 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-royal-700 sm:w-auto"
-                    aria-label={`Call now at ${PHONE_DISPLAY}`}
-                  >
-                    <PhoneCall className="h-4.5 w-4.5" aria-hidden="true" strokeWidth={2.5} />
-                    CALL {PHONE_DISPLAY}
-                  </a>
+                  <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-center">
+                    <a
+                      href={PHONE_TEL}
+                      className="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-royal-600 px-7 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-royal-700 sm:w-auto"
+                      aria-label={`Call now at ${PHONE_DISPLAY}`}
+                    >
+                      <PhoneCall className="h-4.5 w-4.5" aria-hidden="true" strokeWidth={2.5} />
+                      CALL {PHONE_DISPLAY}
+                    </a>
+                    <a
+                      href={`https://wa.me/918498846505?text=${encodeURIComponent(
+                        `Hi Perfect Scrap Deals, I want to sell: ${clientCategory}. Please give me a quote.`
+                      )}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex w-full items-center justify-center gap-3 rounded-2xl bg-[#25D366] px-7 py-4 text-sm font-bold tracking-wide text-white transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#1da851] sm:w-auto"
+                    >
+                      💬 CHAT ON WHATSAPP
+                    </a>
+                  </div>
                   <div>
                     <button
                       type="button"
